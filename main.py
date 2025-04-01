@@ -2,8 +2,7 @@ import asyncio
 from project.inverterFunctions import controlMain, chargeTimes, chargeNow
 from project.wallboxStatus import checkStatus
 
-if __name__ == '__main__':
-
+def control() -> None:
     status = checkStatus()
 
     if status == 'CHARGING':
@@ -11,3 +10,8 @@ if __name__ == '__main__':
         asyncio.run(controlMain(0, chargeNow))
     else:    
         asyncio.run(controlMain(0, chargeTimes))
+
+    return None
+
+if __name__ == '__main__':
+    control()

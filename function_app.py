@@ -1,5 +1,6 @@
 import logging
 import azure.functions as func
+import main as m
 
 app = func.FunctionApp()
 
@@ -8,5 +9,7 @@ app = func.FunctionApp()
 def timer_trigger(myTimer: func.TimerRequest) -> None:
     if myTimer.past_due:
         logging.info('The timer is past due!')
+
+    m.control()
 
     logging.info('Python timer trigger function executed.')
