@@ -12,6 +12,3 @@ def control() -> None:
         asyncio.run(controlMain(0, chargeTimes))
 
     return None
-
-if __name__ == '__main__':
-    control()
