@@ -1,6 +1,7 @@
 from wallbox import Wallbox, Statuses
 import os
 import json
+import time
 
 def secrets() -> tuple:
     """
@@ -19,25 +20,28 @@ def secrets() -> tuple:
 
     username = securityData['Username']
     password = securityData['Password']
+    charger_id = securityData['Charger_Id']
 
-    return username, password
+    return username, password, charger_id
 
 def checkStatus() -> str:
     """
     Returns:
     - Wallbox charger status
     """
-    username,password = secrets()
+    username,password,charger_id = secrets()
 
     wallbox_client = Wallbox(username, password)
     wallbox_client.authenticate()
+    time.sleep(15) #times out if we make too many client calls - 3 in a row is too many!
 
     # Retrieve the list of chargers
-    chargers = wallbox_client.getChargersList()
-    if not chargers:
-        raise Exception("No chargers found for this account.")
+    # chargers = wallbox_client.getChargersList()
+    # if not chargers:
+    #     raise Exception("No chargers found for this account.")
 
-    charger_id = chargers[0]
+    # charger_id = chargers[0]
+    # print(charger_id)    
 
     # Fetch the status of the charger
     charger_status = wallbox_client.getChargerStatus(charger_id)

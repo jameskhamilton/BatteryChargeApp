@@ -4,6 +4,7 @@ from project.wallboxStatus import checkStatus
 
 def control() -> None:
     status = checkStatus()
+    print(status)
 
     if status == 'CHARGING':
         asyncio.run(controlMain(1, None)) #update the time
@@ -12,3 +13,6 @@ def control() -> None:
         asyncio.run(controlMain(0, chargeTimes))
 
     return None
+
+if __name__ == '__main__':
+    control()
